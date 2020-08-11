@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		9646414124E2C85F005D215C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646414024E2C85F005D215C /* AppDelegate.swift */; };
 		9646414324E2C85F005D215C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646414224E2C85F005D215C /* SceneDelegate.swift */; };
-		9646414524E2C85F005D215C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646414424E2C85F005D215C /* ViewController.swift */; };
+		9646414524E2C85F005D215C /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646414424E2C85F005D215C /* ConversationsViewController.swift */; };
 		9646414824E2C85F005D215C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9646414624E2C85F005D215C /* Main.storyboard */; };
 		9646414A24E2C862005D215C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9646414924E2C862005D215C /* Assets.xcassets */; };
 		9646414D24E2C862005D215C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9646414B24E2C862005D215C /* LaunchScreen.storyboard */; };
+		9646415B24E2CE47005D215C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646415A24E2CE47005D215C /* LoginViewController.swift */; };
+		9646415D24E2CE55005D215C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646415C24E2CE55005D215C /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9646413D24E2C85F005D215C /* chatapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9646414024E2C85F005D215C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9646414224E2C85F005D215C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9646414424E2C85F005D215C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9646414424E2C85F005D215C /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		9646414724E2C85F005D215C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9646414924E2C862005D215C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9646414C24E2C862005D215C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9646414E24E2C862005D215C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9646415A24E2CE47005D215C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9646415C24E2CE55005D215C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +73,9 @@
 		9646415424E2C9EB005D215C /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9646414424E2C85F005D215C /* ViewController.swift */,
+				9646414424E2C85F005D215C /* ConversationsViewController.swift */,
+				9646415A24E2CE47005D215C /* LoginViewController.swift */,
+				9646415C24E2CE55005D215C /* RegisterViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -186,7 +192,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9646414524E2C85F005D215C /* ViewController.swift in Sources */,
+				9646415B24E2CE47005D215C /* LoginViewController.swift in Sources */,
+				9646415D24E2CE55005D215C /* RegisterViewController.swift in Sources */,
+				9646414524E2C85F005D215C /* ConversationsViewController.swift in Sources */,
 				9646414124E2C85F005D215C /* AppDelegate.swift in Sources */,
 				9646414324E2C85F005D215C /* SceneDelegate.swift in Sources */,
 			);
