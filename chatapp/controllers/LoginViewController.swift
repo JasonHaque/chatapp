@@ -10,6 +10,13 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    
+    private let scrollView : UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.clipsToBounds = true
+        return scrollView
+    }()
+    
     private let imageView : UIImageView = {
        
         let imageView = UIImageView()
@@ -18,6 +25,20 @@ class LoginViewController: UIViewController {
         
         return imageView
     }()
+    
+    private let emailField : UITextField = {
+        
+        let field = UITextField()
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.returnKeyType = .continue
+        field.layer.cornerRadius = 12
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.placeholder = "Email Address Please"
+        return field
+    }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,18 +48,25 @@ class LoginViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .done, target: self, action: #selector(didTapRegister))
         
         //add subviews
-        view.addSubview(imageView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(imageView)
+        scrollView.addSubview(emailField)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        scrollView.frame = view.bounds
         let size = view.width/3
         
         imageView.frame = CGRect(x: (view.width - size)/2,
                                  y: 20,
                                  width: size,
                                  height: size)
+        emailField.frame = CGRect(x: 30,
+                                  y: imageView.bottom+10,
+                                  width: scrollView.width-60,
+                                  height: 52)
     }
     
     @objc private func didTapRegister(){
