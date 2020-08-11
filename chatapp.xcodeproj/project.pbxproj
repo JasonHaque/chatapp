@@ -16,6 +16,9 @@
 		9646415B24E2CE47005D215C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646415A24E2CE47005D215C /* LoginViewController.swift */; };
 		9646415D24E2CE55005D215C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646415C24E2CE55005D215C /* RegisterViewController.swift */; };
 		9646415F24E2CE80005D215C /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646415E24E2CE80005D215C /* PhotoViewerViewController.swift */; };
+		9646416124E2CEB7005D215C /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646416024E2CEB7005D215C /* VideoPlayerViewController.swift */; };
+		9646416324E2DA06005D215C /* NewConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646416224E2DA06005D215C /* NewConversationsViewController.swift */; };
+		9646416524E2DA27005D215C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646416424E2DA27005D215C /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		9646415A24E2CE47005D215C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9646415C24E2CE55005D215C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		9646415E24E2CE80005D215C /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
+		9646416024E2CEB7005D215C /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		9646416224E2DA06005D215C /* NewConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationsViewController.swift; sourceTree = "<group>"; };
+		9646416424E2DA27005D215C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +85,9 @@
 				9646415A24E2CE47005D215C /* LoginViewController.swift */,
 				9646415C24E2CE55005D215C /* RegisterViewController.swift */,
 				9646415E24E2CE80005D215C /* PhotoViewerViewController.swift */,
+				9646416024E2CEB7005D215C /* VideoPlayerViewController.swift */,
+				9646416224E2DA06005D215C /* NewConversationsViewController.swift */,
+				9646416424E2DA27005D215C /* ProfileViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -198,8 +207,11 @@
 				9646415B24E2CE47005D215C /* LoginViewController.swift in Sources */,
 				9646415D24E2CE55005D215C /* RegisterViewController.swift in Sources */,
 				9646414524E2C85F005D215C /* ConversationsViewController.swift in Sources */,
+				9646416124E2CEB7005D215C /* VideoPlayerViewController.swift in Sources */,
 				9646414124E2C85F005D215C /* AppDelegate.swift in Sources */,
 				9646414324E2C85F005D215C /* SceneDelegate.swift in Sources */,
+				9646416524E2DA27005D215C /* ProfileViewController.swift in Sources */,
+				9646416324E2DA06005D215C /* NewConversationsViewController.swift in Sources */,
 				9646415F24E2CE80005D215C /* PhotoViewerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
