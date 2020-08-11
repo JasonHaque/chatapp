@@ -15,6 +15,7 @@
 		9646414D24E2C862005D215C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9646414B24E2C862005D215C /* LaunchScreen.storyboard */; };
 		9646415B24E2CE47005D215C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646415A24E2CE47005D215C /* LoginViewController.swift */; };
 		9646415D24E2CE55005D215C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646415C24E2CE55005D215C /* RegisterViewController.swift */; };
+		9646415F24E2CE80005D215C /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9646415E24E2CE80005D215C /* PhotoViewerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9646414E24E2C862005D215C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9646415A24E2CE47005D215C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9646415C24E2CE55005D215C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		9646415E24E2CE80005D215C /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				9646414424E2C85F005D215C /* ConversationsViewController.swift */,
 				9646415A24E2CE47005D215C /* LoginViewController.swift */,
 				9646415C24E2CE55005D215C /* RegisterViewController.swift */,
+				9646415E24E2CE80005D215C /* PhotoViewerViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				9646414524E2C85F005D215C /* ConversationsViewController.swift in Sources */,
 				9646414124E2C85F005D215C /* AppDelegate.swift in Sources */,
 				9646414324E2C85F005D215C /* SceneDelegate.swift in Sources */,
+				9646415F24E2CE80005D215C /* PhotoViewerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
