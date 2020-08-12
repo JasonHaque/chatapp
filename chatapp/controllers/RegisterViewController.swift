@@ -201,7 +201,7 @@ class RegisterViewController: UIViewController {
     
     @objc private func changeProfilePic(){
         
-        print("Pic change called")
+        presesntActionSheet()
         
     }
     
@@ -229,3 +229,30 @@ extension RegisterViewController : UITextFieldDelegate{
     }
 }
 
+extension RegisterViewController : UIImagePickerControllerDelegate{
+    
+    func presesntActionSheet(){
+        let actionsheet = UIAlertController(title: "Profile picture", message: "How would you like to add profile picture", preferredStyle: .actionSheet)
+        
+        actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionsheet.addAction(UIAlertAction(title: "Take Photo", style: .default,
+                                            handler: { _ in
+            
+        }))
+        actionsheet.addAction(UIAlertAction(title: "Choose photo", style: .default, handler: { _ in
+             
+            
+        }))
+        
+        present(actionsheet,animated: true)
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+    }
+}
