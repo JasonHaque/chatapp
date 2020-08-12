@@ -77,6 +77,11 @@ class LoginViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .done, target: self, action: #selector(didTapRegister))
         
+        logInButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
+        
+        emailField.delegate = self
+        passwordField.delegate = self
+        
         //add subviews
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
@@ -114,6 +119,39 @@ class LoginViewController: UIViewController {
         vc.title = "Create User Account"
         navigationController?.pushViewController(vc, animated: false)
     }
+    
+    @objc private func loginTapped(){
+        
+        guard let email = emailField.text,let password = passwordField.text ,
+            !email.isEmpty, !password.isEmpty , password.count >= 6 else {
+                alertUserError()
+                return
+        }
+        
+        //FireBase Login
+        
+    }
+    
+    func alertUserError(){
+        
+        let alert = UIAlertController(title: "Woopsie", message: "Please fill out the info properly", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert,animated: true)
+    }
 
 
+}
+
+extension LoginViewController : UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailField{
+            passwordField.becomeFirstResponder()
+        }
+        if textField == passwordField {
+            loginTapped()
+        }
+        
+        return true
+    }
 }
