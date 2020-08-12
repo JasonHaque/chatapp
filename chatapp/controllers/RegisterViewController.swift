@@ -21,7 +21,7 @@ class RegisterViewController: UIViewController {
     private let imageView : UIImageView = {
         
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "head")
+        imageView.image = UIImage(systemName: "person")
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         
@@ -124,6 +124,9 @@ class RegisterViewController: UIViewController {
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
         scrollView.addSubview(registerButton)
+        
+        imageView.isUserInteractionEnabled = true
+        scrollView.isUserInteractionEnabled = true
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(changeProfilePic))
         
