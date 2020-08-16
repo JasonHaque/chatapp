@@ -136,7 +136,7 @@ class LoginViewController: UIViewController {
         
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             guard let result = authResult , error == nil else{
-                print("Something went wrong \(error)")
+                print("Something went wrong \(error!)")
                 return
             }
             
