@@ -21,6 +21,21 @@ final class DatabaseManager{
 
 
 extension DatabaseManager{
+    
+    public func userExists(with email : String, completion : @escaping((Bool)->Void)){
+        
+        database.child(email).observeSingleEvent(of: .value) { snapshot in
+            
+            guard snapshot.value as? String != nil else{
+                completion(false)
+                return
+            }
+            
+            completion(true)
+        }
+    }
+    
+    
     public func insertUser(with user : ChatAppUSer){
         
         database.child(user.emailAddress).setValue([
