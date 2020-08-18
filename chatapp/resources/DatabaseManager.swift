@@ -1,0 +1,22 @@
+//
+//  DatabaseManager.swift
+//  chatapp
+//
+//  Created by Sanviraj Zahin Haque on 18/8/20.
+//  Copyright © 2020 Sanviraj Zahin Haque. All rights reserved.
+//
+
+import Foundation
+import FirebaseDatabase
+
+final class DatabaseManager{
+    
+    static let shared = DatabaseManager()
+    
+    private let database = Database.database().reference()
+    
+    
+    public func test(){
+        database.child("foo").setValue(["somthing":true])
+    }
+}
