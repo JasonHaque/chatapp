@@ -16,7 +16,27 @@ final class DatabaseManager{
     private let database = Database.database().reference()
     
     
-    public func test(){
-        database.child("foo").setValue(["somthing":true])
+    
+}
+
+
+extension DatabaseManager{
+    public func insertUser(with user : ChatAppUSer){
+        
+        database.child(user.emailAddress).setValue([
+            "first_name" : user.firstName,
+            "last_name" : user.lastName
+        ])
+        
+        
     }
+}
+
+
+struct ChatAppUSer{
+    let firstName : String
+    let lastName : String
+    let emailAddress : String
+    
+    //let profilePictureUrl : String
 }
