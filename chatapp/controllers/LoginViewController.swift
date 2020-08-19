@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
@@ -70,6 +71,8 @@ class LoginViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
     }()
+    
+    private let faceBookloginButton = FBLoginButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +85,7 @@ class LoginViewController: UIViewController {
         
         emailField.delegate = self
         passwordField.delegate = self
+        faceBookloginButton.delegate = self
         
         //add subviews
         view.addSubview(scrollView)
@@ -89,6 +93,10 @@ class LoginViewController: UIViewController {
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
         scrollView.addSubview(logInButton)
+        
+        
+        
+        scrollView.addSubview(faceBookloginButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,6 +121,13 @@ class LoginViewController: UIViewController {
                                    y: passwordField.bottom+10,
                                    width: scrollView.width-60,
                                    height: 52)
+        faceBookloginButton.frame = CGRect(x: 30,
+                                  y: logInButton.bottom+10,
+                                  width: scrollView.width-60,
+                                  height: 52)
+        
+        faceBookloginButton.frame.origin.y = logInButton.bottom+20
+        
     }
     
     @objc private func didTapRegister(){
@@ -174,4 +189,26 @@ extension LoginViewController : UITextFieldDelegate{
         
         return true
     }
+}
+
+extension LoginViewController : LoginButtonDelegate{
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        
+        guard let token = result?.token?.tokenString else {
+            print("User Failed to login with facebook")
+            return
+        }
+        
+        let credential = FacebookAuthProvider.credential(withAccessToken: token)
+        
+        FirebaseAuth.Auth.auth().signIn(with: credential) { authResult,error in
+            
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        //no operation
+    }
+    
+    
 }
