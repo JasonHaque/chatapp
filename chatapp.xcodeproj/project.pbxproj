@@ -178,6 +178,7 @@
 				9646413A24E2C85F005D215C /* Frameworks */,
 				9646413B24E2C85F005D215C /* Resources */,
 				29A2850E7E93D82E3D3EA8EE /* [CP] Embed Pods Frameworks */,
+				218857B356578448DA05632D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,6 +237,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		218857B356578448DA05632D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-chatapp/Pods-chatapp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-chatapp/Pods-chatapp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-chatapp/Pods-chatapp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		29A2850E7E93D82E3D3EA8EE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
