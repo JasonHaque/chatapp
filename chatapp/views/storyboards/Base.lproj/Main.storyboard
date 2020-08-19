@@ -30,14 +30,26 @@
                     <view key="view" contentMode="scaleToFill" id="gII-SP-Xsg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZVc-ws-nC6">
+                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ZVc-ws-nC6" firstAttribute="leading" secondItem="nWY-8d-uNl" secondAttribute="leading" id="8G3-us-Zrd"/>
+                            <constraint firstItem="nWY-8d-uNl" firstAttribute="bottom" secondItem="ZVc-ws-nC6" secondAttribute="bottom" id="jw5-cE-Kus"/>
+                            <constraint firstItem="nWY-8d-uNl" firstAttribute="trailing" secondItem="ZVc-ws-nC6" secondAttribute="trailing" id="qV3-4v-ctx"/>
+                            <constraint firstItem="ZVc-ws-nC6" firstAttribute="top" secondItem="nWY-8d-uNl" secondAttribute="top" id="wP7-pI-BHi"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="nWY-8d-uNl"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="XG3-N3-C4v"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IY6-mz-w9g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1741" y="488"/>
+            <point key="canvasLocation" x="1699" y="494"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FgR-mM-Oph">
