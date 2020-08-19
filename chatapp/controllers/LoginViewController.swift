@@ -86,7 +86,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginObserver = NotificationCenter.default.addObserver(forName: Notification.Name(""),object: nil,queue: .main)
+        loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification,object: nil,queue: .main)
         { [weak self] _  in
             guard let strongSelf = self else {return}
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)

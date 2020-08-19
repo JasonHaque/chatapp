@@ -85,6 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             
             print("Sign in with google")
+            NotificationCenter.default.post(name: .didLogInNotification, object: nil)
         }
         
     }
