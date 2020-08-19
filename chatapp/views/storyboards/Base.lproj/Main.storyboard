@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Conversations View Controller-->
+        <!--Chats-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ConversationsViewController" customModule="chatapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,23 +17,23 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="iik-1c-0F7"/>
+                    <navigationItem key="navigationItem" title="Chats" id="iik-1c-0F7"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="713" y="473"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile-->
         <scene sceneID="Jhq-SK-6f9">
             <objects>
-                <viewController id="Cgz-e2-gbm" sceneMemberID="viewController">
+                <viewController id="Cgz-e2-gbm" customClass="ProfileViewController" customModule="chatapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gII-SP-Xsg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="nWY-8d-uNl"/>
                     </view>
-                    <navigationItem key="navigationItem" id="XG3-N3-C4v"/>
+                    <navigationItem key="navigationItem" title="Profile" id="XG3-N3-C4v"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IY6-mz-w9g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -57,14 +57,14 @@
             </objects>
             <point key="canvasLocation" x="1249" y="-1013"/>
         </scene>
-        <!--Item-->
+        <!--chats-->
         <scene sceneID="zHV-XI-KGD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uIl-Vr-m7r" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="F1Y-DH-hSe"/>
+                    <tabBarItem key="tabBarItem" title="chats" id="F1Y-DH-hSe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="v1o-0k-Rgd">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="v1o-0k-Rgd">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -76,13 +76,13 @@
             </objects>
             <point key="canvasLocation" x="714" y="-258"/>
         </scene>
-        <!--Item-->
+        <!--profile-->
         <scene sceneID="0dW-4h-JY7">
             <objects>
                 <navigationController id="VEk-wS-WiV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="MBR-9k-hkx"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6CF-Bg-ZjE">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <tabBarItem key="tabBarItem" title="profile" id="MBR-9k-hkx"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="6CF-Bg-ZjE">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
