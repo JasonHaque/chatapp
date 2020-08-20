@@ -14,6 +14,7 @@ class NewConversationsViewController: UIViewController {
     private let spinner = JGProgressHUD(style: .dark)
     
     private var users = [[String : String]]()
+    private var results = [[String : String]]()
     private var hasFetched = false
     private let searchBar : UISearchBar = {
         let searchBar = UISearchBar()
@@ -66,6 +67,9 @@ extension NewConversationsViewController : UISearchBarDelegate{
         guard let text = searchBar.text , !text.replacingOccurrences(of: " ", with: "").isEmpty else {
             return
         }
+        
+        results.removeAll()
+        
         spinner.show(in: view)
         self.searchUsers(query: text)
         
@@ -76,12 +80,26 @@ extension NewConversationsViewController : UISearchBarDelegate{
         //check array for results
         
         if hasFetched{
-            //filter
+            
+            filterUsers(with: query)
         }
         
         else{
            
             //fetch + filter
+            
+            DatabaseManager.shared.getAllUsers(completion: {[weak self] result in
+                
+                switch result {
+                case .success(let usersCollection):
+                    self?.users = usersCollection
+                    self?.filterUsers(with: query)
+                case .failure(let error):
+                    print("failed to get user \(error)")
+                }
+                
+            })
+            
         }
         
         
@@ -91,5 +109,34 @@ extension NewConversationsViewController : UISearchBarDelegate{
         
         //show results
         
+    }
+    
+    func filterUsers (with term : String){
+        guard hasFetched else {
+            return
+        }
+        
+        var results : [[String : String]] = self.users.filter({
+            guard let name = $0["name"]?.lowercased() else{
+                return false
+            }
+            return name.hasPrefix(term.lowercased())
+        })
+        
+        self.results = results
+        
+        updateUI()
+       
+    }
+    
+    func updateUI(){
+        if results.isEmpty{
+            self.noResultsLabel.isHidden = false
+            self.tableView.isHidden = true
+        }
+        else{
+            self.noResultsLabel.isHidden = true
+            self.tableView.isHidden = false
+        }
     }
 }
