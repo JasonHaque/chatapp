@@ -210,11 +210,37 @@ extension DatabaseManager {
             if var conversations = userNode["conversations"] as? [[String : Any]]{
                 //already exists
                 //append now
+                conversations.append(newConversationData)
+                userNode["conversations"] = conversations
+                
+                ref.setValue(userNode,withCompletionBlock: { error , _ in
+                    
+                    guard error == nil else{
+                        completion(false)
+                        return
+                    }
+                    
+                    completion(true)
+                    
+                })
+                
             }
             else{
                 //let new
+                userNode["conversations"] = [
+                    newConversationData
+                ]
                 
-                
+                ref.setValue(userNode,withCompletionBlock: { error , _ in
+                    
+                    guard error == nil else{
+                        completion(false)
+                        return
+                    }
+                    
+                    completion(true)
+                    
+                })
                 
             }
         }
