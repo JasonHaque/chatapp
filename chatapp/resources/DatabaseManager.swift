@@ -196,9 +196,11 @@ extension DatabaseManager {
                 break
             }
             
+            let conversationId = "conversation_\(firstMessage.messageId)"
+            
             let newConversationData : [String : Any] = [
                 
-                "id" : "conversation_\(firstMessage.messageId)",
+                "id" : conversationId,
                 "other_user_email" : otherUserEmail,
                 "latest_message" : [
                     "date" : dateString,
@@ -213,14 +215,14 @@ extension DatabaseManager {
                 conversations.append(newConversationData)
                 userNode["conversations"] = conversations
                 
-                ref.setValue(userNode,withCompletionBlock: { error , _ in
+                ref.setValue(userNode,withCompletionBlock: { [weak self] error , _ in
                     
                     guard error == nil else{
                         completion(false)
                         return
                     }
                     
-                    completion(true)
+                   self?.finishCreatingConversation(conversationID: conversationId, firstMessage: firstMessage, completion: completion)
                     
                 })
                 
@@ -231,19 +233,51 @@ extension DatabaseManager {
                     newConversationData
                 ]
                 
-                ref.setValue(userNode,withCompletionBlock: { error , _ in
+                ref.setValue(userNode,withCompletionBlock: { [weak self] error , _ in
                     
                     guard error == nil else{
                         completion(false)
                         return
                     }
                     
-                    completion(true)
+                    self?.finishCreatingConversation(conversationID: conversationId, firstMessage: firstMessage, completion: completion)
+                    
+                   
                     
                 })
                 
             }
         }
+    }
+    
+    private func finishCreatingConversation(conversationID : String , firstMessage : Message ,completion : @escaping (Bool) -> Void){
+        
+        let message : [String : Any] = [
+            "id": firstMessage.messageId,
+            "type" : firstMessage.kind.messageKindString,
+            "content" : "",
+            "date" :"",
+            "sender_email" :"",
+            "is_read": false
+        ]
+        let value : [String : Any] = [
+            
+            "messages" : [
+                message
+            ]
+        ]
+        
+        database.child("\(conversationID)").setValue(value ,withCompletionBlock: { error , _ in
+            
+            guard error == nil else{
+                completion(false)
+                
+                return
+            }
+            
+            completion(true)
+            
+        })
     }
     
     /// fetches and returns all conversations for user with passed in email
