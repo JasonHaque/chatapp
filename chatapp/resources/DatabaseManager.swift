@@ -252,18 +252,47 @@ extension DatabaseManager {
     
     private func finishCreatingConversation(conversationID : String , firstMessage : Message ,completion : @escaping (Bool) -> Void){
         
-        let message : [String : Any] = [
+        let messageDate = firstMessage.sentDate
+        let dateString = ChatViewController.dateFormatter.string(from: messageDate)
+        var message = ""
+        switch firstMessage.kind {
+            
+        case .text(let messageText):
+            message = messageText
+        case .attributedText(_):
+            break
+        case .photo(_):
+            break
+        case .video(_):
+            break
+        case .location(_):
+            break
+        case .emoji(_):
+            break
+        case .audio(_):
+            break
+        case .contact(_):
+            break
+        case .custom(_):
+            break
+        }
+        guard let myEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            completion(false)
+            return
+        }
+        let currentUserEmail = DatabaseManager.safeEmail(emailAddress: myEmail)
+        let collectionMessage : [String : Any] = [
             "id": firstMessage.messageId,
             "type" : firstMessage.kind.messageKindString,
-            "content" : "",
-            "date" :"",
-            "sender_email" :"",
+            "content" : message,
+            "date" : dateString,
+            "sender_email" : currentUserEmail,
             "is_read": false
         ]
         let value : [String : Any] = [
             
             "messages" : [
-                message
+                collectionMessage
             ]
         ]
         

@@ -172,11 +172,14 @@ extension ChatViewController : InputBarAccessoryViewDelegate{
         
         //date , otherUserEmail , SenderMail , randomInt
         
-        let dateString = Self.dateFormatter.string(from: Date())
+        
         guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else {
             return nil
         }
-        let newId = "\(otherUserEmail)_\(currentUserEmail)_\(dateString)"
+        let safeCurrentEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
+        let dateString = Self.dateFormatter.string(from: Date())
+        
+        let newId = "\(otherUserEmail)_\(safeCurrentEmail)_\(dateString)"
         
         return newId
     }
