@@ -12,6 +12,9 @@ import JGProgressHUD
 class NewConversationsViewController: UIViewController {
     
     private let spinner = JGProgressHUD(style: .dark)
+    
+    private var users = [[String : String]]()
+    private var hasFetched = false
     private let searchBar : UISearchBar = {
         let searchBar = UISearchBar()
         
@@ -58,6 +61,26 @@ class NewConversationsViewController: UIViewController {
 
 extension NewConversationsViewController : UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        
+        guard let text = searchBar.text , !text.replacingOccurrences(of: " ", with: "").isEmpty else {
+            return
+        }
+        spinner.show(in: view)
+        self.searchUsers(query: text)
+        
+    }
+    
+    func searchUsers(query : String){
+        
+        //check array for results
+        
+        //filter
+        
+        //update UI
+        
+        
+        //show results
         
     }
 }
