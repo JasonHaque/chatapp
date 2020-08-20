@@ -46,14 +46,40 @@ class ProfileViewController: UIViewController {
         
         
         imageView.contentMode = .scaleAspectFill
-        
+        imageView.backgroundColor = .white
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.borderWidth = 3
         imageView.layer.masksToBounds = true
         
         headerView.addSubview(imageView)
         
+        StorageManager.shared.downloadURL(for: path) {[weak self] result in
+            
+            switch result{
+            case .success(let url):
+                self?.downloadImage(imageView: imageView, url: url)
+            case .failure(let error):
+                print("failed to get download url : \(error)")
+            }
+        }
         return headerView
+    }
+    
+    func downloadImage(imageView : UIImageView ,url : URL){
+        
+        URLSession.shared.dataTask(with: url) { data, _ , error in
+            
+            guard let data = data , error == nil else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                imageView.image = image
+            }
+            
+            
+        }.resume()
     }
     
 
