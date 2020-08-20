@@ -148,3 +148,29 @@ struct ChatAppUSer{
         return "\(safeEmail)_profile_picture.png"
     }
 }
+
+//MARK:- sending messages
+
+extension DatabaseManager {
+    
+    ///Create a new convo with target user email and first message
+    public func createNewConversation(with otherUserEmail : String, firstMessage : Message , completion : @escaping (Bool) -> Void){
+        
+    }
+    
+    /// fetches and returns all conversations for user with passed in email
+
+    public func getAllConversations(for email : String , completion : @escaping (Result<String,Error>) -> Void){
+        
+    }
+    
+    ///gets all messages
+    public func getAllMessagesForConversation(with id : String , completion : @escaping (Result<String,Error>) -> Void){
+        
+    }
+    
+    ///sends a message to a convo
+    public func sendMessage(to conversation : String , message : Message , completion: @escaping (Bool) -> Void){
+        
+    }
+}

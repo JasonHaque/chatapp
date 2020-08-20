@@ -44,14 +44,7 @@ class ChatViewController: MessagesViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        messages.append(Message(sender: selfSender,
-                                messageId: "1",
-                                sentDate: Date(),
-                                kind: .text("Hello world Message")))
-        messages.append(Message(sender: selfSender,
-                                messageId: "1",
-                                sentDate: Date(),
-                                kind: .text("Hello world Message")))
+       
         view.backgroundColor = .red
         
         messagesCollectionView.messagesDataSource = self
@@ -60,6 +53,12 @@ class ChatViewController: MessagesViewController{
         messageInputBar.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        messageInputBar.inputTextView.becomeFirstResponder()
+    }
 
 
 }
@@ -87,6 +86,8 @@ extension ChatViewController : InputBarAccessoryViewDelegate{
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {
             return
         }
+        
+        print("Sending message \(text)")
         
         //send message
         
