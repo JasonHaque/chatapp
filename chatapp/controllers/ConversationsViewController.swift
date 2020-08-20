@@ -55,8 +55,23 @@ class ConversationsViewController: UIViewController {
     
     @objc private func didTapComposeButton(){
         let vc = NewConversationsViewController()
+        
+        vc.completion = { [weak self] result in
+            
+            print("\(result)")
+            
+            self?.createNewConversation(result: result)
+        }
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC,animated: true)
+    }
+    
+    private func createNewConversation(result : [String : String]){
+        
+        let vc = ChatViewController()
+        vc.title = "Joey Smaith"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func validateAuth(){
