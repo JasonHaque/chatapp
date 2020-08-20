@@ -58,6 +58,14 @@ extension DatabaseManager{
         
         
     }
+    
+    static func safeEmail(emailAddress : String) -> String{
+        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        
+        return safeEmail
+    }
+    
 }
 
 
