@@ -65,8 +65,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
         DatabaseManager.shared.userExists(with: email) { exists in
             
+            let chatUser = ChatAppUSer(firstName: firstName, lastName: lastName, emailAddress: email)
             if !exists{
-                DatabaseManager.shared.insertUser(with: ChatAppUSer(firstName: firstName, lastName: lastName, emailAddress: email))
+                DatabaseManager.shared.insertUser(with: chatUser ,completion: { success in
+                    
+                    if success{
+                        //upload image
+                    }
+                    
+                })
             }
         }
         guard let authentication = user.authentication else {
