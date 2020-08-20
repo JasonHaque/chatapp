@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageKit
+import InputBarAccessoryView
 
 struct Message : MessageType {
     var sender: SenderType
@@ -25,9 +26,21 @@ struct Sender : SenderType {
     
 }
 class ChatViewController: MessagesViewController{
+    
+    public var isNewConversation = false
+    public let otherUserEmail : String
 
     private var messages = [Message]()
     private let selfSender = Sender(senderId: "Joe Smith", displayName: "1", photoURL: "")
+    
+    init(with email  : String){
+        self.otherUserEmail = email
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +57,7 @@ class ChatViewController: MessagesViewController{
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        messageInputBar.delegate = self
     }
     
 
@@ -64,4 +78,25 @@ extension ChatViewController : MessagesDataSource,MessagesLayoutDelegate,Message
     }
     
     
+}
+
+extension ChatViewController : InputBarAccessoryViewDelegate{
+    
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        
+        guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {
+            return
+        }
+        
+        //send message
+        
+        if isNewConversation{
+            
+            //create Convo in db
+        }
+        
+        else{
+            //append to existing one
+        }
+    }
 }
