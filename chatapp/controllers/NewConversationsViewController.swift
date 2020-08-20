@@ -75,7 +75,16 @@ extension NewConversationsViewController : UISearchBarDelegate{
         
         //check array for results
         
-        //filter
+        if hasFetched{
+            //filter
+        }
+        
+        else{
+           
+            //fetch + filter
+        }
+        
+        
         
         //update UI
         

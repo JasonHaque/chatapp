@@ -112,6 +112,23 @@ extension DatabaseManager{
         return safeEmail
     }
     
+    public func getAllUsers (completion : @escaping (Result <[[String : String]], Error>) -> Void){
+        
+        database.child("users").observeSingleEvent(of: .value) { snapshot in
+            
+            guard let value = snapshot.value as? [[String : String]] else{
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+            
+            completion(.success(value))
+        }
+    }
+    
+    public enum DatabaseError : Error {
+        case failedToFetch
+    }
+    
 }
 
 
