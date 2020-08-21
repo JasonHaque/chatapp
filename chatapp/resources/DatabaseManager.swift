@@ -55,6 +55,9 @@ extension DatabaseManager{
                 self.database.child("users").observeSingleEvent(of: .value) { snapshot in
                     
                     if var usersCollection = snapshot.value as? [[String : String]]{
+                        print("array exists")
+                        
+                        print(usersCollection)
                         let newElement = [
                             [
                                 "name" : user.firstName + " " + user.lastName,
@@ -63,6 +66,7 @@ extension DatabaseManager{
                         ]
                         
                         usersCollection.append(contentsOf: newElement)
+                        print(usersCollection)
                         self.database.child("users").setValue(usersCollection,withCompletionBlock: { error , _ in
                             
                             guard error == nil else {
@@ -416,6 +420,23 @@ extension DatabaseManager {
     
     ///sends a message to a convo
     public func sendMessage(to conversation : String , message : Message , completion: @escaping (Bool) -> Void){
+        
+    }
+}
+
+extension DatabaseManager{
+    
+    public func getDataFor(path : String ,  completion : @escaping (Result<Any,Error>) -> Void){
+        
+        self.database.child("\(path)").observeSingleEvent(of: .value) { snapshot in
+            
+            guard let value = snapshot.value else{
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+            
+            completion(.success(value))
+        }
         
     }
 }
