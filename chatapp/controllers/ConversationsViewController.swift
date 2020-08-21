@@ -58,6 +58,25 @@ class ConversationsViewController: UIViewController {
     }
     
     private func startListeningForConversations(){
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else{
+            return
+        }
+        
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        
+        DatabaseManager.shared.getAllConversations(for: email) { [weak self] result in
+            
+            switch result {
+            case .success(let conversations):
+                guard !conversations.isEmpty else{
+                    return
+                }
+                self?.conversations = conversations
+            
+            case .failure(let error):
+                print("Failed to get convos \(error)")
+            }
+        }
         
     }
     override func viewDidLayoutSubviews() {
