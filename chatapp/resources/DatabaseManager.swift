@@ -349,6 +349,41 @@ extension DatabaseManager {
     ///gets all messages
     public func getAllMessagesForConversation(with id : String , completion : @escaping (Result<[Message],Error>) -> Void){
         
+        
+        database.child("\(id)/messages").observe(.value) { snapshot in
+            
+            guard let value = snapshot.value as? [[String : Any]] else {
+                completion(.failure(DatabaseError.failedToFetch))
+                print("failing to get messages from db")
+                return
+            }
+            let messages : [Message] = value.compactMap({ dictionary in
+                
+                guard let name = dictionary["name"] as? String,
+                    let isRead = dictionary["is_read"] as? Bool,
+                    let messageId = dictionary["id"] as? String,
+                    let content = dictionary["content"] as? String,
+                    let senderEmail = dictionary["sender_email"] as? String,
+                    let type = dictionary["type"] as? String,
+                    let dateString = dictionary["date"] as? String ,
+                    let date = ChatViewController.dateFormatter.date(from: dateString) else{
+                        return nil
+                }
+                
+                let sender = Sender(senderId: senderEmail, displayName: name, photoURL: "")
+                
+                return Message(sender: sender, messageId: messageId, sentDate: date, kind: .text(content))
+                
+                
+               
+                
+                
+            })
+            
+            completion(.success(messages))
+            
+        }
+        
     }
     
     ///sends a message to a convo

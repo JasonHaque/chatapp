@@ -115,10 +115,16 @@ class ChatViewController: MessagesViewController{
         DatabaseManager.shared.getAllMessagesForConversation(with: id) { [weak self] result in
             switch result{
             case .success(let messages):
+                print("success case")
                 guard !messages.isEmpty else{
                     return
                 }
                 self?.messages = messages
+                print("found the messages")
+                print(messages)
+                DispatchQueue.main.async {
+                    self?.messagesCollectionView.reloadDataAndKeepOffset()
+                }
             case .failure(let error):
                 print("Error while finding messages \(error)")
             }
@@ -137,12 +143,13 @@ extension ChatViewController : MessagesDataSource,MessagesLayoutDelegate,Message
         
         fatalError("self sender is nil email should be cached")
         
-        return Sender(senderId: "12", displayName: "", photoURL: "")
+       
        
         
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
+        print(messages[indexPath.section])
         return messages[indexPath.section]
     }
     
