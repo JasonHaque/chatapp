@@ -25,6 +25,7 @@
 		9653101424EC1FC300BD0AB4 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9653101324EC1FC300BD0AB4 /* DatabaseManager.swift */; };
 		96872FBE24ED5EE200569787 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96872FBD24ED5EE200569787 /* ChatViewController.swift */; };
 		96D666B524EE6C23007C115B /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D666B424EE6C23007C115B /* StorageManager.swift */; };
+		96DDD98C24EFB4B400081432 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DDD98B24EFB4B400081432 /* ConversationTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		96639E1F062CBE840B5615F9 /* Pods-chatapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatapp.debug.xcconfig"; path = "Target Support Files/Pods-chatapp/Pods-chatapp.debug.xcconfig"; sourceTree = "<group>"; };
 		96872FBD24ED5EE200569787 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		96D666B424EE6C23007C115B /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		96DDD98B24EFB4B400081432 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		C218016473BFF4DC6DE052BE /* Pods-chatapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatapp.release.xcconfig"; path = "Target Support Files/Pods-chatapp/Pods-chatapp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 			children = (
 				9646415924E2CC1A005D215C /* storyboards */,
 				9646414924E2C862005D215C /* Assets.xcassets */,
+				96DDD98B24EFB4B400081432 /* ConversationTableViewCell.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				9646414324E2C85F005D215C /* SceneDelegate.swift in Sources */,
 				9646416524E2DA27005D215C /* ProfileViewController.swift in Sources */,
 				9646416324E2DA06005D215C /* NewConversationsViewController.swift in Sources */,
+				96DDD98C24EFB4B400081432 /* ConversationTableViewCell.swift in Sources */,
 				96872FBE24ED5EE200569787 /* ChatViewController.swift in Sources */,
 				9646415F24E2CE80005D215C /* PhotoViewerViewController.swift in Sources */,
 				96D666B524EE6C23007C115B /* StorageManager.swift in Sources */,
