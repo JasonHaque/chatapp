@@ -340,6 +340,8 @@ extension DatabaseManager {
                 
             })
             
+            completion(.success(conversations))
+            
         }
         
     }
