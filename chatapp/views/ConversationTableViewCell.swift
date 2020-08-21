@@ -67,7 +67,7 @@ class ConversationTableViewCell: UITableViewCell {
         
     }
     
-    public func configure(with model : String){
+    public func configure(with model : Conversation){
         
     }
 
