@@ -154,7 +154,7 @@ struct ChatAppUSer{
 extension DatabaseManager {
     
     ///Create a new convo with target user email and first message
-    public func createNewConversation(with otherUserEmail : String, firstMessage : Message , completion : @escaping (Bool) -> Void){
+    public func createNewConversation(with otherUserEmail : String, name : String, firstMessage : Message , completion : @escaping (Bool) -> Void){
         
         guard let currentEmail = UserDefaults.standard.value(forKey: "email") as? String else {
             return
@@ -202,6 +202,7 @@ extension DatabaseManager {
                 
                 "id" : conversationId,
                 "other_user_email" : otherUserEmail,
+                "name" : name,
                 "latest_message" : [
                     "date" : dateString,
                     "message" : message,
@@ -222,7 +223,7 @@ extension DatabaseManager {
                         return
                     }
                     
-                   self?.finishCreatingConversation(conversationID: conversationId, firstMessage: firstMessage, completion: completion)
+                    self?.finishCreatingConversation(name: name, conversationID: conversationId, firstMessage: firstMessage, completion: completion)
                     
                 })
                 
@@ -240,7 +241,7 @@ extension DatabaseManager {
                         return
                     }
                     
-                    self?.finishCreatingConversation(conversationID: conversationId, firstMessage: firstMessage, completion: completion)
+                    self?.finishCreatingConversation(name: name, conversationID: conversationId, firstMessage: firstMessage, completion: completion)
                     
                    
                     
@@ -250,7 +251,7 @@ extension DatabaseManager {
         }
     }
     
-    private func finishCreatingConversation(conversationID : String , firstMessage : Message ,completion : @escaping (Bool) -> Void){
+    private func finishCreatingConversation(name :String ,conversationID : String , firstMessage : Message ,completion : @escaping (Bool) -> Void){
         
         let messageDate = firstMessage.sentDate
         let dateString = ChatViewController.dateFormatter.string(from: messageDate)
@@ -287,7 +288,8 @@ extension DatabaseManager {
             "content" : message,
             "date" : dateString,
             "sender_email" : currentUserEmail,
-            "is_read": false
+            "is_read": false,
+            "name" : name
         ]
         let value : [String : Any] = [
             
