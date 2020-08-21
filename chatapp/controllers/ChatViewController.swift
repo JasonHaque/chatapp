@@ -70,8 +70,8 @@ class ChatViewController: MessagesViewController{
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
             return nil
         }
-        
-        return Sender(senderId: email, displayName: "Joe Smith", photoURL: "")
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        return Sender(senderId: safeEmail, displayName: "Me", photoURL: "")
         
     }
     
@@ -84,7 +84,7 @@ class ChatViewController: MessagesViewController{
         super.init(nibName: nil, bundle: nil)
         
         if let conversationId = conversationId {
-            listenForMessages(id: conversationId)
+            listenForMessages(id: conversationId,shouldScrollToBottom : true)
         }
     }
     
@@ -111,7 +111,7 @@ class ChatViewController: MessagesViewController{
         messageInputBar.inputTextView.becomeFirstResponder()
     }
     
-    private func listenForMessages(id : String){
+    private func listenForMessages(id : String, shouldScrollToBottom : Bool){
         DatabaseManager.shared.getAllMessagesForConversation(with: id) { [weak self] result in
             switch result{
             case .success(let messages):
@@ -124,6 +124,11 @@ class ChatViewController: MessagesViewController{
                 print(messages)
                 DispatchQueue.main.async {
                     self?.messagesCollectionView.reloadDataAndKeepOffset()
+                    if shouldScrollToBottom{
+                       
+                        self?.messagesCollectionView.scrollToBottom()
+                    }
+                    
                 }
             case .failure(let error):
                 print("Error while finding messages \(error)")
