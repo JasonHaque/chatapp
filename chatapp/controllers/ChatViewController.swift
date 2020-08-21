@@ -83,9 +83,7 @@ class ChatViewController: MessagesViewController{
         self.conversationId = id
         super.init(nibName: nil, bundle: nil)
         
-        if let conversationId = conversationId {
-            listenForMessages(id: conversationId,shouldScrollToBottom : true)
-        }
+       
     }
     
     required init?(coder: NSCoder) {
@@ -109,6 +107,9 @@ class ChatViewController: MessagesViewController{
         super.viewDidAppear(animated)
         
         messageInputBar.inputTextView.becomeFirstResponder()
+        if let conversationId = conversationId {
+            listenForMessages(id: conversationId,shouldScrollToBottom : true)
+        }
     }
     
     private func listenForMessages(id : String, shouldScrollToBottom : Bool){
