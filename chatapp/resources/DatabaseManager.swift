@@ -347,7 +347,7 @@ extension DatabaseManager {
     }
     
     ///gets all messages
-    public func getAllMessagesForConversation(with id : String , completion : @escaping (Result<String,Error>) -> Void){
+    public func getAllMessagesForConversation(with id : String , completion : @escaping (Result<[Message],Error>) -> Void){
         
     }
     

@@ -62,6 +62,7 @@ class ChatViewController: MessagesViewController{
     }()
     public var isNewConversation = false
     public let otherUserEmail : String
+    private let conversationId : String?
 
     private var messages = [Message]()
     private var selfSender : Sender?{
@@ -73,11 +74,18 @@ class ChatViewController: MessagesViewController{
         return Sender(senderId: email, displayName: "Joe Smith", photoURL: "")
         
     }
+    
+  
         
     
-    init(with email  : String){
+    init(with email  : String, id: String?){
         self.otherUserEmail = email
+        self.conversationId = id
         super.init(nibName: nil, bundle: nil)
+        
+        if let conversationId = conversationId {
+            listenForMessages(id: conversationId)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -93,6 +101,7 @@ class ChatViewController: MessagesViewController{
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,7 +110,21 @@ class ChatViewController: MessagesViewController{
         
         messageInputBar.inputTextView.becomeFirstResponder()
     }
-
+    
+    private func listenForMessages(id : String){
+        DatabaseManager.shared.getAllMessagesForConversation(with: id) { [weak self] result in
+            switch result{
+            case .success(let messages):
+                guard !messages.isEmpty else{
+                    return
+                }
+                self?.messages = messages
+            case .failure(let error):
+                print("Error while finding messages \(error)")
+            }
+        }
+    }
+    
 
 }
 
