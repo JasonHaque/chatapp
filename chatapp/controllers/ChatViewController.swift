@@ -180,18 +180,21 @@ extension ChatViewController : InputBarAccessoryViewDelegate{
         
         //send message
         
+        let message = Message(sender: selfSender,
+                              messageId: messageId,
+                              sentDate: Date(),
+                              kind: .text(text))
+        
         if isNewConversation{
             
             //create Convo in db
             
-            let message = Message(sender: selfSender,
-                                  messageId: messageId,
-                                  sentDate: Date(),
-                                  kind: .text(text))
             
-            DatabaseManager.shared.createNewConversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message) {  success in
+            
+            DatabaseManager.shared.createNewConversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message) { [weak self] success in
                 if success{
                     print("message sent")
+                    self?.isNewConversation = false
                 }
                 else{
                     print("failed to send")
@@ -200,7 +203,15 @@ extension ChatViewController : InputBarAccessoryViewDelegate{
         }
         
         else{
-            //append to existing one
+            DatabaseManager.shared.sendMessage(to: otherUserEmail, message: message) { success in
+                
+                if success{
+                    print("message sent")
+                }
+                else{
+                    print("failed to send message")
+                }
+            }
         }
     }
     
