@@ -304,8 +304,14 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
         
         picker.dismiss(animated: true, completion: nil)
         
-        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else{
-            return
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage ,
+            let imageData = image.pngData() else{
+                return
         }
+        //upload image
+        
+        //StorageManager.shared.
+        
+        //send message
     }
 }
