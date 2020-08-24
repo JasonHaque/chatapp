@@ -131,15 +131,35 @@ class ChatViewController: MessagesViewController{
         actionsheet.addAction(UIAlertAction(title: "Audio", style: .default, handler: { [weak self] _ in
             
         }))
-        actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
-            
-        }))
+        actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
         
         present(actionsheet,animated: true)
         
     }
     
-    private photoInputActionsheet(){
+    private func photoInputActionsheet(){
+        
+        let actionsheet = UIAlertController(title: "Attach photo", message: "From where would you like to attach photo from ?", preferredStyle: .actionSheet)
+        
+        actionsheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
+            let picker = UIImagePickerController()
+            picker.sourceType = .camera
+            picker.delegate = self
+            picker.allowsEditing = true
+            self?.present(picker,animated: true)
+        }))
+        
+        actionsheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { [weak self] _ in
+            
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = self
+            picker.allowsEditing = true
+            self?.present(picker,animated: true)
+        }))
+        actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(actionsheet,animated: true)
         
     }
     override func viewDidAppear(_ animated: Bool) {
