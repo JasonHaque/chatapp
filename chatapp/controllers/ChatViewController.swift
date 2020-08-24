@@ -107,7 +107,7 @@ class ChatViewController: MessagesViewController{
         
         let button = InputBarButtonItem()
         button.setSize(CGSize(width: 35, height: 35), animated: false)
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
         button.onTouchUpInside{ [weak self] _ in
             self?.presentInputAction()
             
@@ -118,6 +118,28 @@ class ChatViewController: MessagesViewController{
     }
     
     func presentInputAction(){
+        
+        let actionsheet = UIAlertController(title: "Attach media", message: "What would you like to attach", preferredStyle: .actionSheet)
+        
+        actionsheet.addAction(UIAlertAction(title: "Photo", style: .default, handler: { [weak self] _ in
+            self?.photoInputActionsheet()
+        }))
+        
+        actionsheet.addAction(UIAlertAction(title: "Video", style: .default, handler: { [weak self] _ in
+            
+        }))
+        actionsheet.addAction(UIAlertAction(title: "Audio", style: .default, handler: { [weak self] _ in
+            
+        }))
+        actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
+            
+        }))
+        
+        present(actionsheet,animated: true)
+        
+    }
+    
+    private photoInputActionsheet(){
         
     }
     override func viewDidAppear(_ animated: Bool) {
