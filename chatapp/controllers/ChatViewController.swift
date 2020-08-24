@@ -99,9 +99,27 @@ class ChatViewController: MessagesViewController{
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
+        setUpInputButton()
         
     }
     
+    private func setUpInputButton(){
+        
+        let button = InputBarButtonItem()
+        button.setSize(CGSize(width: 35, height: 35), animated: false)
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.onTouchUpInside{ [weak self] _ in
+            self?.presentInputAction()
+            
+        }
+        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
+        messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+        
+    }
+    
+    func presentInputAction(){
+        
+    }
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
