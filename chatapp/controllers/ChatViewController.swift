@@ -294,3 +294,18 @@ extension ChatViewController : InputBarAccessoryViewDelegate{
         return newId
     }
 }
+
+extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        picker.dismiss(animated: true, completion: nil)
+        
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else{
+            return
+        }
+    }
+}
