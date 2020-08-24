@@ -310,8 +310,23 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
         }
         //upload image
         
-        //StorageManager.shared.
+        guard let messageId = createMessageId() else {
+            return
+        }
         
-        //send message
+        let fileName = "photo_message_"+messageId
+        
+        StorageManager.shared.uploadMessagePhoto(with: imageData, fileName: fileName) { result in
+            switch result{
+                
+            case .success(let urlString):
+                //ready to send message
+                print("Uploaded message photo \(urlString)")
+            case .failure(let error):
+                print("message photo upload error \(error)")
+            }
+        }
+        
+        
     }
 }
