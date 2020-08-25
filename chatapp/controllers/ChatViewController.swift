@@ -367,61 +367,72 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
         
         picker.dismiss(animated: true, completion: nil)
         
-        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage ,
-            let imageData = image.pngData(),
-            let conversationId = conversationId,
+        guard let conversationId = conversationId,
             let name = self.title,
             let selfSender = self.selfSender else{
                 return
         }
-        //upload image
         
         guard let messageId = createMessageId() else {
             return
         }
         
-        let fileName = "photo_message_"+messageId.replacingOccurrences(of: " ", with: "-") + ".png"
         
-        StorageManager.shared.uploadMessagePhoto(with: imageData, fileName: fileName) { [weak self] result in
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage ,let imageData = image.pngData() {
             
-            guard let strongSelf = self else{
-                return
-            }
-            switch result{
+            let fileName = "photo_message_"+messageId.replacingOccurrences(of: " ", with: "-") + ".png"
+            
+            StorageManager.shared.uploadMessagePhoto(with: imageData, fileName: fileName) { [weak self] result in
                 
-            case .success(let urlString):
-                //ready to send message
-                print("Uploaded message photo \(urlString)")
-                
-                
-                guard let url = URL(string: urlString),
-                let placeholder = UIImage(systemName: "plus") else {
+                guard let strongSelf = self else{
                     return
                 }
-                
-                
-                let media = Media(url: url, image: nil, placeholderImage: placeholder, size: .zero)
-                
-                let message = Message(sender: selfSender,
-                                      messageId: messageId,
-                                      sentDate: Date(),
-                                      kind: .photo(media))
-                
-                DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message) { success in
+                switch result{
                     
-                    if success{
-                        
-                        print("sent photo message")
-                        
-                    }else{
-                        print("could not send photo message")
+                case .success(let urlString):
+                    //ready to send message
+                    print("Uploaded message photo \(urlString)")
+                    
+                    
+                    guard let url = URL(string: urlString),
+                        let placeholder = UIImage(systemName: "plus") else {
+                            return
                     }
                     
+                    
+                    let media = Media(url: url, image: nil, placeholderImage: placeholder, size: .zero)
+                    
+                    let message = Message(sender: selfSender,
+                                          messageId: messageId,
+                                          sentDate: Date(),
+                                          kind: .photo(media))
+                    
+                    DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message) { success in
+                        
+                        if success{
+                            
+                            print("sent photo message")
+                            
+                        }else{
+                            print("could not send photo message")
+                        }
+                        
+                    }
+                case .failure(let error):
+                    print("message photo upload error \(error)")
                 }
-            case .failure(let error):
-                print("message photo upload error \(error)")
             }
+            
         }
+            
+        else{
+            let fileName = "photo_message_"+messageId.replacingOccurrences(of: " ", with: "-") + ".mov"
+            
+        }
+        //upload image
+        
+        
+        
         
         
     }
