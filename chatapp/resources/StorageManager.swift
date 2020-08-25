@@ -79,7 +79,7 @@ final class StorageManager{
                 return
             }
             
-         self.storage.child("images/\(fileName)").downloadURL(completion: {url , error in
+         self.storage.child("message_images/\(fileName)").downloadURL(completion: {url , error in
                 
                 guard let url = url else {
                     print("failedToGetDownloadUrl")
