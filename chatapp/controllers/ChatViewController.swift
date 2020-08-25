@@ -305,7 +305,10 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
         picker.dismiss(animated: true, completion: nil)
         
         guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage ,
-            let imageData = image.pngData() else{
+            let imageData = image.pngData(),
+            let conversationId = conversationId,
+            let name = self.title,
+            let selfSender = self.selfSender else{
                 return
         }
         //upload image
@@ -316,12 +319,25 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
         
         let fileName = "photo_message_"+messageId
         
-        StorageManager.shared.uploadMessagePhoto(with: imageData, fileName: fileName) { result in
+        StorageManager.shared.uploadMessagePhoto(with: imageData, fileName: fileName) { [weak self] result in
+            
+            guard let strongSelf = self else{
+                return
+            }
             switch result{
                 
             case .success(let urlString):
                 //ready to send message
                 print("Uploaded message photo \(urlString)")
+                
+                let message = Message(sender: selfSender,
+                                      messageId: messageId,
+                                      sentDate: Date(),
+                                      kind: .photo(<#T##MediaItem#>))
+                
+                DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message) { success in
+                    
+                }
             case .failure(let error):
                 print("message photo upload error \(error)")
             }
