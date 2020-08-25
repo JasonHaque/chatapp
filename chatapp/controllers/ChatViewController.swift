@@ -51,6 +51,17 @@ struct Sender : SenderType {
     public var photoURL : String
     
 }
+struct  Media : MediaItem {
+    var url: URL?
+    
+    var image: UIImage?
+    
+    var placeholderImage: UIImage
+    
+    var size: CGSize
+    
+    
+}
 class ChatViewController: MessagesViewController{
     
     public static let dateFormatter : DateFormatter = {
@@ -330,12 +341,29 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
                 //ready to send message
                 print("Uploaded message photo \(urlString)")
                 
+                
+                guard let url = URL(string: urlString),
+                let placeholder = UIImage(systemName: "plus") else {
+                    return
+                }
+                
+                
+                let media = Media(url: url, image: nil, placeholderImage: placeholder, size: .zero)
+                
                 let message = Message(sender: selfSender,
                                       messageId: messageId,
                                       sentDate: Date(),
-                                      kind: .photo(<#T##MediaItem#>))
+                                      kind: .photo(media))
                 
                 DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message) { success in
+                    
+                    if success{
+                        
+                        print("sent photo message")
+                        
+                    }else{
+                        print("could not send photo message")
+                    }
                     
                 }
             case .failure(let error):
