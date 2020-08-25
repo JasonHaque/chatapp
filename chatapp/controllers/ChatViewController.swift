@@ -328,7 +328,7 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
             return
         }
         
-        let fileName = "photo_message_"+messageId
+        let fileName = "photo_message_"+messageId.replacingOccurrences(of: " ", with: "-") + ".png"
         
         StorageManager.shared.uploadMessagePhoto(with: imageData, fileName: fileName) { [weak self] result in
             
