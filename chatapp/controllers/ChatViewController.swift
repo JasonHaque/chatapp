@@ -139,6 +139,7 @@ class ChatViewController: MessagesViewController{
         }))
         
         actionsheet.addAction(UIAlertAction(title: "Video", style: .default, handler: { [weak self] _ in
+            self?.videoInputActionsheet()
             
         }))
         actionsheet.addAction(UIAlertAction(title: "Audio", style: .default, handler: { [weak self] _ in
@@ -167,6 +168,36 @@ class ChatViewController: MessagesViewController{
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
             picker.delegate = self
+            picker.allowsEditing = true
+            self?.present(picker,animated: true)
+        }))
+        actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(actionsheet,animated: true)
+        
+    }
+    
+    private func videoInputActionsheet(){
+        
+        let actionsheet = UIAlertController(title: "Attach Video", message: "From where would you like to attach Video from ?", preferredStyle: .actionSheet)
+        
+        actionsheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
+            let picker = UIImagePickerController()
+            picker.sourceType = .camera
+            picker.delegate = self
+            picker.mediaTypes = ["public.movies"]
+            picker.videoQuality = .typeMedium
+            picker.allowsEditing = true
+            self?.present(picker,animated: true)
+        }))
+        
+        actionsheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { [weak self] _ in
+            
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = self
+            picker.mediaTypes = ["public.movies"]
+            picker.videoQuality = .typeMedium
             picker.allowsEditing = true
             self?.present(picker,animated: true)
         }))
