@@ -252,6 +252,22 @@ extension ChatViewController : MessagesDataSource,MessagesLayoutDelegate,Message
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let message = messages[indexPath.section]
+        
+        switch message.kind{
+        case .photo(let media):
+            
+            guard let imageUrl = media.url else {
+                return
+            }
+            let vc = PhotoViewerViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
+    }
+    
     
 }
 
