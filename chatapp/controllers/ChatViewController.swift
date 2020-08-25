@@ -425,11 +425,55 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
             
         }
             
-        else{
+        else if let videoUrl = info[.mediaURL] as? URL {
             let fileName = "photo_message_"+messageId.replacingOccurrences(of: " ", with: "-") + ".mov"
             
+            //upload video
+            
+            StorageManager.shared.uploadMessagePhoto(with: imageData, fileName: fileName) { [weak self] result in
+                
+                guard let strongSelf = self else{
+                    return
+                }
+                switch result{
+                    
+                case .success(let urlString):
+                    //ready to send message
+                    print("Uploaded message photo \(urlString)")
+                    
+                    
+                    guard let url = URL(string: urlString),
+                        let placeholder = UIImage(systemName: "plus") else {
+                            return
+                    }
+                    
+                    
+                    let media = Media(url: url, image: nil, placeholderImage: placeholder, size: .zero)
+                    
+                    let message = Message(sender: selfSender,
+                                          messageId: messageId,
+                                          sentDate: Date(),
+                                          kind: .photo(media))
+                    
+                    DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message) { success in
+                        
+                        if success{
+                            
+                            print("sent photo message")
+                            
+                        }else{
+                            print("could not send photo message")
+                        }
+                        
+                    }
+                case .failure(let error):
+                    print("message photo upload error \(error)")
+                }
+            }
+            
+            
         }
-        //upload image
+        
         
         
         
