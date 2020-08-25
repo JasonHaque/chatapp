@@ -9,6 +9,7 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
+import SDWebImage
 
 struct Message : MessageType {
     public var sender: SenderType
@@ -232,6 +233,19 @@ extension ChatViewController : MessagesDataSource,MessagesLayoutDelegate,Message
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         messages.count
+    }
+    
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        guard let message = message as? Message else {
+            return
+        }
+        
+        switch message.kind{
+        case .photo(let media):
+            break
+        default:
+            break
+        }
     }
     
     
