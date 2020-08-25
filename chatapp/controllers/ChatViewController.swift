@@ -430,7 +430,7 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
             
             //upload video
             
-            StorageManager.shared.uploadMessagePhoto(with: imageData, fileName: fileName) { [weak self] result in
+            StorageManager.shared.uploadMessageVideo(with: videoUrl, fileName: fileName) { [weak self] result in
                 
                 guard let strongSelf = self else{
                     return
@@ -439,7 +439,7 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
                     
                 case .success(let urlString):
                     //ready to send message
-                    print("Uploaded message photo \(urlString)")
+                    print("Uploaded message Video \(urlString)")
                     
                     
                     guard let url = URL(string: urlString),
@@ -453,16 +453,16 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
                     let message = Message(sender: selfSender,
                                           messageId: messageId,
                                           sentDate: Date(),
-                                          kind: .photo(media))
+                                          kind: .video(media))
                     
                     DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message) { success in
                         
                         if success{
                             
-                            print("sent photo message")
+                            print("sent Video message")
                             
                         }else{
-                            print("could not send photo message")
+                            print("could not send video message")
                         }
                         
                     }
