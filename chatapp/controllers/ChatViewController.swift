@@ -242,7 +242,11 @@ extension ChatViewController : MessagesDataSource,MessagesLayoutDelegate,Message
         
         switch message.kind{
         case .photo(let media):
-            break
+            
+            guard let imageUrl = media.url else {
+                return
+            }
+            imageView.sd_setImage(with: imageUrl, completed: nil)
         default:
             break
         }
