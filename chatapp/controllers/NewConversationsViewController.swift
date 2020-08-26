@@ -11,12 +11,12 @@ import JGProgressHUD
 
 class NewConversationsViewController: UIViewController {
     
-    public var completion: (([String:String]) -> Void)?
+    public var completion: ((SearchResult) -> Void)?
     
     private let spinner = JGProgressHUD(style: .dark)
     
     private var users = [[String : String]]()
-    private var results = [[String : String]]()
+    private var results = [SearchResult]()
     private var hasFetched = false
     private let searchBar : UISearchBar = {
         let searchBar = UISearchBar()
@@ -133,7 +133,7 @@ extension NewConversationsViewController : UISearchBarDelegate{
         }
         let safeEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
         self.spinner.dismiss()
-        let results : [[String : String]] = self.users.filter({
+        let results : [SearchResult] = self.users.filter({
             guard let email = $0["email"],
                 email != safeEmail else{
                     return false
@@ -143,6 +143,13 @@ extension NewConversationsViewController : UISearchBarDelegate{
                 return false
             }
             return name.hasPrefix(term.lowercased())
+        }).compactMap({
+            guard let email = $0["email"],let name = $0["name"] else{
+                    return nil
+            }
+            
+           
+            return SearchResult(name: name, email: email)
         })
         
         self.results = results
@@ -171,7 +178,7 @@ extension NewConversationsViewController :  UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = results[indexPath.row]["name"]
+        cell.textLabel?.text = results[indexPath.row].name
         return cell
     }
     
@@ -194,4 +201,9 @@ extension NewConversationsViewController :  UITableViewDelegate,UITableViewDataS
     }
     
     
+}
+
+struct SearchResult{
+    let name: String
+    let email : String
 }
