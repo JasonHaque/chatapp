@@ -185,7 +185,7 @@ class ChatViewController: MessagesViewController{
             let picker = UIImagePickerController()
             picker.sourceType = .camera
             picker.delegate = self
-            picker.mediaTypes = ["public.movies"]
+            picker.mediaTypes = ["public.movie"]
             picker.videoQuality = .typeMedium
             picker.allowsEditing = true
             self?.present(picker,animated: true)
@@ -196,7 +196,7 @@ class ChatViewController: MessagesViewController{
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
             picker.delegate = self
-            picker.mediaTypes = ["public.movies"]
+            picker.mediaTypes = ["public.movie"]
             picker.videoQuality = .typeMedium
             picker.allowsEditing = true
             self?.present(picker,animated: true)
