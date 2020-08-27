@@ -553,15 +553,27 @@ extension DatabaseManager {
                             }
                             position += 1
                         }
-                        targetConversation?["latest_message"] = updatedValue
-                        
-                        guard let finalConversation = targetConversation else{
-                            completion(false)
-                            return
+                        if var targetConversation = targetConversation {
+                            
+                            targetConversation["latest_message"] = updatedValue
+                            
+                           
+                            
+                            currentUserConversations[position] = targetConversation
+                            databaseEntryConversations = currentUserConversations
+                            
                         }
-                        
-                        currentUserConversations[position] = finalConversation
-                        databaseEntryConversations = currentUserConversations
+                        else{
+                            let newConversationData : [String : Any] = [
+                                
+                                "id" : conversation,
+                                "other_user_email" : DatabaseManager.safeEmail(emailAddress: otherUserEmail),
+                                "name" : name,
+                                "latest_message" : updatedValue
+                            ]
+                            currentUserConversations.append(newConversationData)
+                            databaseEntryConversations = currentUserConversations
+                        }
                     }
                     
                     else{
