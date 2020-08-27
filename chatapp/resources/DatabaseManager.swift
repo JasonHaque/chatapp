@@ -610,6 +610,10 @@ extension DatabaseManager {
                             ]
                             var otherDatabaseEntryConversations = [[String : Any]]()
                             
+                            guard let currentName = UserDefaults.standard.value(forKey: "name") as? String else{
+                                return
+                            }
+                            
                             if var otherUserConversations = snapshot.value as? [[String : Any]] {
                                 var targetConversation : [String : Any]?
                                 var position = 0
@@ -638,8 +642,8 @@ extension DatabaseManager {
                                     let newConversationData : [String : Any] = [
                                         
                                         "id" : conversation,
-                                        "other_user_email" : DatabaseManager.safeEmail(emailAddress: otherUserEmail),
-                                        "name" : name,
+                                        "other_user_email" : DatabaseManager.safeEmail(emailAddress: currentEmail),
+                                        "name" : currentName,
                                         "latest_message" : updatedValue
                                     ]
                                     otherUserConversations.append(newConversationData)
@@ -654,8 +658,8 @@ extension DatabaseManager {
                                 let newConversationData : [String : Any] = [
                                     
                                     "id" : conversation,
-                                    "other_user_email" : DatabaseManager.safeEmail(emailAddress: otherUserEmail),
-                                    "name" : name,
+                                    "other_user_email" : DatabaseManager.safeEmail(emailAddress: currentEmail),
+                                    "name" : currentName,
                                     "latest_message" : updatedValue
                                 ]
                                 
