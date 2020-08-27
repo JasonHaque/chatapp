@@ -143,13 +143,34 @@ class ConversationsViewController: UIViewController {
         let name = result.name
         let email = DatabaseManager.safeEmail(emailAddress: result.email)
         
+        DatabaseManager.shared.conversationExists(with: email) { [weak self] result in
+            
+            guard let strongSelf = self else{
+                return
+            }
+            
+            switch result{
+                
+            case .success(let conversationId):
+                
+                let vc = ChatViewController(with: email,id: conversationId)
+                vc.isNewConversation = false
+                vc.title = name
+                vc.navigationItem.largeTitleDisplayMode = .never
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+                
+            case .failure(let error):
+                print("error occured due to \(error)")
+                let vc = ChatViewController(with: email,id: nil)
+                vc.isNewConversation = true
+                vc.title = name
+                vc.navigationItem.largeTitleDisplayMode = .never
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
         
         
-        let vc = ChatViewController(with: email,id: nil)
-        vc.isNewConversation = true
-        vc.title = name
-        vc.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     private func validateAuth(){
