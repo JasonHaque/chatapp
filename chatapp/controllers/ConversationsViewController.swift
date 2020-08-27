@@ -175,10 +175,17 @@ extension ConversationsViewController : UITableViewDelegate, UITableViewDataSour
         tableView.deselectRow(at: indexPath, animated: true)
         
         let model = conversations[indexPath.row]
+        openConversation(model)
+        
+    }
+    
+    func openConversation(_ model: Conversation){
+        
         let vc = ChatViewController(with: model.otherUserEmail,id: model.id)
         vc.title = model.name
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
