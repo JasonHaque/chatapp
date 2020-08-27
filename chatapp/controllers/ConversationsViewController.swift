@@ -128,11 +128,11 @@ class ConversationsViewController: UIViewController {
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
             else{
-                
+                 strongSelf.createNewConversation(result: result)
             }
             print("\(result)")
             
-            strongSelf.createNewConversation(result: result)
+           
         }
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC,animated: true)
