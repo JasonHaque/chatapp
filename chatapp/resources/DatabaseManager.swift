@@ -30,7 +30,7 @@ extension DatabaseManager{
         
         database.child(safeEmail).observeSingleEvent(of: .value) { snapshot in
             
-            guard snapshot.value as? String != nil else{
+            guard snapshot.exists() else{
                 completion(false)
                 return
             }
