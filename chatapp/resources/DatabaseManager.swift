@@ -690,4 +690,18 @@ extension DatabaseManager{
         }
         
     }
+    
+    public func conversationExists(with targetRecipientEmail : String , completion : @escaping (Result<String,Error>)-> Void){
+        
+        let safeRecipientEmail = DatabaseManager.safeEmail(emailAddress: targetRecipientEmail)
+        
+        guard let senderEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
+        
+        let safeSenderEmail = DatabaseManager.safeEmail(emailAddress: senderEmail)
+        
+        
+        
+    }
 }

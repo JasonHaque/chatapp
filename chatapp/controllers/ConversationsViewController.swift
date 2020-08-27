@@ -113,9 +113,13 @@ class ConversationsViewController: UIViewController {
         
         vc.completion = { [weak self] result in
             
+            guard let strongSelf = self else {
+                return
+            }
+            
             print("\(result)")
             
-            self?.createNewConversation(result: result)
+            strongSelf.createNewConversation(result: result)
         }
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC,animated: true)
