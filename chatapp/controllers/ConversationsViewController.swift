@@ -116,7 +116,20 @@ class ConversationsViewController: UIViewController {
             guard let strongSelf = self else {
                 return
             }
+            let currentConversations = strongSelf.conversations
             
+            if let targetConversation = currentConversations.first(where:{
+                $0.otherUserEmail == DatabaseManager.safeEmail(emailAddress: result.email)
+            }){
+                let vc = ChatViewController(with: targetConversation.otherUserEmail,id: targetConversation.id)
+                vc.isNewConversation = false
+                vc.title = targetConversation.name
+                vc.navigationItem.largeTitleDisplayMode = .never
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+            else{
+                
+            }
             print("\(result)")
             
             strongSelf.createNewConversation(result: result)
