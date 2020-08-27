@@ -47,6 +47,8 @@ class ConversationsViewController: UIViewController {
         label.isHidden = true
         return label
     }()
+    
+    private var loginObserver:NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,13 +57,22 @@ class ConversationsViewController: UIViewController {
         view.addSubview(noConversationsLabel)
         setupTableView()
         startListeningForConversations()
+        
+        loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification,object: nil,queue: .main)
+        { [weak self] _  in
+            guard let strongSelf = self else {return}
+            strongSelf.startListeningForConversations()
+            
+        }
     }
     
     private func startListeningForConversations(){
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else{
             return
         }
-        
+        if let observer = loginObserver{
+            NotificationCenter.default.removeObserver(observer)
+        }
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         
         DatabaseManager.shared.getAllConversations(for: safeEmail) { [weak self] result in
@@ -93,7 +104,7 @@ class ConversationsViewController: UIViewController {
         
         validateAuth()
         fetchConversations()
-        
+        startListeningForConversations()
         
     }
     
