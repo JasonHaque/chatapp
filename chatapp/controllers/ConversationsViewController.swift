@@ -141,7 +141,9 @@ class ConversationsViewController: UIViewController {
     private func createNewConversation(result : SearchResult){
         
         let name = result.name
-        let email = result.email
+        let email = DatabaseManager.safeEmail(emailAddress: result.email)
+        
+        
         
         let vc = ChatViewController(with: email,id: nil)
         vc.isNewConversation = true
