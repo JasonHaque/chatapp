@@ -166,12 +166,45 @@ class ChatViewController: MessagesViewController{
         
         vc.completion = {[weak self] selectedCoordinates in
             
+            guard let strongSelf = self else{
+                return
+            }
+            
+            guard let conversationId = self?.conversationId,
+                let name = self?.title,
+                let selfSender = self?.selfSender else{
+                    return
+            }
+            
+            guard let messageId = self?.createMessageId() else {
+                return
+            }
+            
             let longitude:Double = selectedCoordinates.longitude
             let lattitude:Double = selectedCoordinates.latitude
             
             
             
             print("long : \(longitude)   ----   lat : \(lattitude)")
+            
+            let location = Location(location: CLLocation(latitude: lattitude, longitude: longitude), size: .zero)
+            
+            let message = Message(sender: selfSender,
+                                  messageId: messageId,
+                                  sentDate: Date(),
+                                  kind: .location(location))
+            
+            DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message) { success in
+                
+                if success{
+                    
+                    print("sent location message")
+                    
+                }else{
+                    print("could not send location message")
+                }
+                
+            }
             
         }
         navigationController?.pushViewController(vc, animated: true)

@@ -56,10 +56,18 @@ class LocationPickerViewController: UIViewController {
         let coordinates = map.convert(locationView, toCoordinateFrom: map)
         
         self.coordinates = coordinates
+        print(coordinates.latitude)
+        print(coordinates.longitude)
+        print("shit")
         //drop a pin so user can visually see where he tapped
+        
+        for annotation in map.annotations{
+            map.removeAnnotation(annotation)
+        }
         
         let pin = MKPointAnnotation()
         pin.coordinate = coordinates
+        
         map.addAnnotation(pin)
         
     }
