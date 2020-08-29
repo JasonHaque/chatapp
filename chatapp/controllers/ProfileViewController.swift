@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
         data.append(ProfileViewModel(viewModelType: .info, title: "name", handler: nil))
         data.append(ProfileViewModel(viewModelType: .logout, title: "Log out", handler: { [weak self]  in
             
@@ -129,8 +130,9 @@ extension ProfileViewController : UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let viewModel = data[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
+        cell.setUp(with: viewModel)
         return cell
         
     }
@@ -138,8 +140,31 @@ extension ProfileViewController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        data[indexPath.row].handler?()
+        
        
     }
     
     
+}
+
+
+class ProfileTableViewCell : UITableViewCell{
+    
+    static let identifier = "ProfileTableViewCell"
+    
+    public func setUp(with viewModel : ProfileViewModel){
+        
+        self.textLabel?.text = viewModel.title
+        
+        switch viewModel.viewModelType{
+            
+        case .info:
+            self.textLabel?.textAlignment = .left
+        case .logout:
+            self.textLabel?.textAlignment = .center
+            self.textLabel?.textColor = .red
+            
+        }
+    }
 }
