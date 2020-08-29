@@ -23,8 +23,12 @@ class LocationPickerViewController: UIViewController {
     }()
     
     init(coordinates : CLLocationCoordinate2D?){
-        self.coordinates = coordinates
-        self.isPickable = false
+        if let coord = coordinates {
+            self.coordinates = coord
+            self.isPickable = false
+          
+        }
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -38,7 +42,8 @@ class LocationPickerViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        if isPickable{
+        if isPickable == true {
+            print("authorized")
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Send location" , style: .done, target: self, action: #selector(didTapSendLocation))
             map.isUserInteractionEnabled = true
             let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapMap(_:)))
@@ -57,6 +62,7 @@ class LocationPickerViewController: UIViewController {
             pin.coordinate = coordinates
             
             map.addAnnotation(pin)
+            
         }
         
         view.addSubview(map)
