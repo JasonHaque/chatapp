@@ -19,9 +19,12 @@ class LocationPickerViewController: UIViewController {
         
         return map
     }()
+    private var  coordinates : CLLocationCoordinate2D?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "pick a location"
+        view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Send location" , style: .done, target: self, action: #selector(didTapSendLocation))
         view.addSubview(map)
         map.isUserInteractionEnabled = true
@@ -38,6 +41,11 @@ class LocationPickerViewController: UIViewController {
     
     @objc func didTapSendLocation(){
         
+        guard let coordinates = self.coordinates else {
+            return
+        }
+        
+        completion?(coordinates)
         
         
     }
@@ -45,6 +53,14 @@ class LocationPickerViewController: UIViewController {
     @objc func didTapMap(_ gesture : UITapGestureRecognizer){
         
         let locationView = gesture.location(in: map)
+        let coordinates = map.convert(locationView, toCoordinateFrom: map)
+        
+        self.coordinates = coordinates
+        //drop a pin so user can visually see where he tapped
+        
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinates
+        map.addAnnotation(pin)
         
     }
     override func viewDidLayoutSubviews() {
