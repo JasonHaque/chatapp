@@ -494,7 +494,9 @@ extension DatabaseManager {
                 }
                 
                 break
-            case .location(_):
+            case .location(let locationData):
+                let location = locationData.location
+                message = "\(location.coordinate.longitude),\(location.coordinate.latitude)"
                 break
             case .emoji(_):
                 break
