@@ -20,7 +20,7 @@ struct ProfileViewModel{
     
     let viewModelType : ProfileViewModelType
     let title : String
-    let handler : () -> Void
+    let handler : (() -> Void)?
  
 }
 
@@ -28,11 +28,49 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet var tableView : UITableView!
     
-    let data = ["log out"]
+    var data = [ProfileViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        data.append(ProfileViewModel(viewModelType: .info, title: "name", handler: nil))
+        data.append(ProfileViewModel(viewModelType: .logout, title: "Log out", handler: { [weak self]  in
+            
+            guard let strongSelf = self else{
+                return
+            }
+            
+            let actionsheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+            
+            actionsheet.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: {[weak self] _ in
+                
+                guard let strongSelf = self else{
+                    return
+                }
+                //log out from fb
+                FBSDKLoginKit.LoginManager().logOut()
+                GIDSignIn.sharedInstance()?.signOut()
+                
+                do{
+                    try FirebaseAuth.Auth.auth().signOut()
+                    
+                    let vc = LoginViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    strongSelf.present(nav,animated: true)
+                    
+                }catch{
+                    print(error)
+                }
+                
+            }))
+            
+            actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            strongSelf.present(actionsheet,animated: true)
+            
+            
+        }))
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.delegate = self
@@ -93,45 +131,12 @@ extension ProfileViewController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel?.text = data[indexPath.row]
-        cell.textLabel?.textAlignment = .center
-        cell.textLabel?.textColor = .red
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let actionsheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        
-        actionsheet.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: {[weak self] _ in
-            
-            guard let strongSelf = self else{
-                return
-            }
-            //log out from fb
-            FBSDKLoginKit.LoginManager().logOut()
-            GIDSignIn.sharedInstance()?.signOut()
-            
-            do{
-                try FirebaseAuth.Auth.auth().signOut()
-                
-                let vc = LoginViewController()
-                let nav = UINavigationController(rootViewController: vc)
-                nav.modalPresentationStyle = .fullScreen
-                strongSelf.present(nav,animated: true)
-                
-            }catch{
-                print(error)
-            }
-            
-        }))
-        
-        actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(actionsheet,animated: true)
         
        
     }
