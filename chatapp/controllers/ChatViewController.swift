@@ -12,6 +12,7 @@ import InputBarAccessoryView
 import SDWebImage
 import AVFoundation
 import AVKit
+import CoreLocation
 
 struct Message : MessageType {
     public var sender: SenderType
@@ -56,15 +57,17 @@ struct Sender : SenderType {
 }
 struct  Media : MediaItem {
     var url: URL?
-    
     var image: UIImage?
-    
     var placeholderImage: UIImage
-    
     var size: CGSize
-    
-    
 }
+
+struct Location : LocationItem{
+    var location: CLLocation
+    var size: CGSize
+}
+
+
 class ChatViewController: MessagesViewController{
     
     public static let dateFormatter : DateFormatter = {
@@ -147,9 +150,17 @@ class ChatViewController: MessagesViewController{
         actionsheet.addAction(UIAlertAction(title: "Audio", style: .default, handler: { [weak self] _ in
             
         }))
+        
+        actionsheet.addAction(UIAlertAction(title: "Location", style: .default, handler: { [weak self] _ in
+            self?.presentLocationPicker()
+        }))
         actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
         
         present(actionsheet,animated: true)
+        
+    }
+    
+    private func presentLocationPicker(){
         
     }
     
