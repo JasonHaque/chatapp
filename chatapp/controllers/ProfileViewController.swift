@@ -34,7 +34,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
-        data.append(ProfileViewModel(viewModelType: .info, title: "name", handler: nil))
+        data.append(ProfileViewModel(viewModelType: .info, title: "Name : \(UserDefaults.standard.value(forKey: "name") as? String ?? "No Name")", handler: nil))
+        data.append(ProfileViewModel(viewModelType: .info, title: "Email : \(UserDefaults.standard.value(forKey: "email") as? String ?? "No Email")", handler: nil))
         data.append(ProfileViewModel(viewModelType: .logout, title: "Log out", handler: { [weak self]  in
             
             guard let strongSelf = self else{
@@ -161,6 +162,7 @@ class ProfileTableViewCell : UITableViewCell{
             
         case .info:
             self.textLabel?.textAlignment = .left
+            self.selectionStyle = .none
         case .logout:
             self.textLabel?.textAlignment = .center
             self.textLabel?.textColor = .red
