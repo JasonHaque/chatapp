@@ -544,6 +544,24 @@ extension ChatViewController:UIImagePickerControllerDelegate,UINavigationControl
 
 extension ChatViewController : MessageCellDelegate{
     
+    func didTapMessage(in cell: MessageCollectionViewCell) {
+        
+        guard let indexPath = messagesCollectionView.indexPath(for: cell) else{
+            return
+        }
+        let message = messages[indexPath.section]
+        
+        switch message.kind{
+        case .location(let locationData):
+            let coordinates = locationData.location.coordinate
+            let vc = LocationPickerViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        default:
+            break
+        }
+    }
+    
     func didTapImage(in cell: MessageCollectionViewCell) {
         guard let indexPath = messagesCollectionView.indexPath(for: cell) else{
             return
