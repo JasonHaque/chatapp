@@ -11,6 +11,8 @@ target 'chatapp' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'FBSDKLoginKit'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
   pod 'GoogleSignIn'
   pod 'MessageKit'
   pod 'JGProgressHUD'
