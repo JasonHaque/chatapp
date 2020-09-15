@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>868493357752-qpp7ev07udjic29hcmhfvc9g77mndn3i.apps.googleusercontent.com</string>
+	<string>"Generate own key from firebase"</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.868493357752-qpp7ev07udjic29hcmhfvc9g77mndn3i</string>
+	<string>"Generate own key from firebase"</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB8mwsjnnRuiF0WUZUUnDX4-ak39BLhzlY</string>
+	<string>"Generate own key from firebase"</string>
 	<key>GCM_SENDER_ID</key>
-	<string>868493357752</string>
+	<string>"Generate own key from firebase"</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.hello.chatapp</string>
+	<string>"Generate own key from firebase"</string>
 	<key>PROJECT_ID</key>
-	<string>chatapp-afe96</string>
+	<string>"Generate own key from firebase"</string>
 	<key>STORAGE_BUCKET</key>
-	<string>chatapp-afe96.appspot.com</string>
+	<string>"Generate own key from firebase"</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:868493357752:ios:8b12e1feab62f7b286fa4d</string>
+	<string>"Generate own key from firebase"/string>
 	<key>DATABASE_URL</key>
-	<string>https://chatapp-afe96.firebaseio.com</string>
+	<string>"Generate own key from firebase"</string>
 </dict>
 </plist>
