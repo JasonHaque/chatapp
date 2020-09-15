@@ -369,6 +369,8 @@ extension ChatViewController : InputBarAccessoryViewDelegate{
                               sentDate: Date(),
                               kind: .text(text))
         
+        inputBar.inputTextView.text = ""
+        
         if isNewConversation{
             
             //create Convo in db
@@ -378,6 +380,7 @@ extension ChatViewController : InputBarAccessoryViewDelegate{
             DatabaseManager.shared.createNewConversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message) { [weak self] success in
                 if success{
                     print("message sent")
+                    
                     self?.isNewConversation = false
                 }
                 else{
